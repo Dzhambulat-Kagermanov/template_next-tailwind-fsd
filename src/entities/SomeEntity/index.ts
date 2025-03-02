@@ -1,0 +1,1 @@
+export { SomeEntity } from './ui'
