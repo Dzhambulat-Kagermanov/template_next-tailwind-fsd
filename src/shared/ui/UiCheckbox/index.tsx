@@ -9,13 +9,14 @@ const wrapperCls = (isDisabled?: boolean) =>
 	}`
 const labelCls = (isDisabled?: boolean) =>
 	`${isDisabled ? 'text-[#9a8f8f]' : 'text-black'}`
-const inpCls = `cursor-pointer border-[solid] border-[1px] disabled:border-[#9a8f8f] border-black rounded-[4px] size-5 flex items-center justify-between before:w-[calc(100%-2px)] before:h-[calc(100%-2px)] before:block  before:bg-[url(./checkMark.svg)] before:bg-contain before:bg-center before:bg-no-repeat transition-[120ms_transform_ease-in-out] before:origin-bottom-left before:scale-0 checked:before:scale-100`
+const inpCls = `cursor-pointer border-[solid] border-[1px] disabled:border-[#9a8f8f] border-black rounded-[4px] size-5 flex items-center justify-between before:w-[calc(100%-2px)] before:h-[calc(100%-2px)] before:block before:bg-[url(/images/shared/checkMark.svg)] before:bg-contain before:bg-center before:bg-no-repeat before:transition-[120ms_transform_ease-in-out] before:origin-bottom-left before:scale-0 checked:before:scale-100`
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface TUiCheckboxProps
+	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
 	label?: string
 	inpClassName?: string
 }
-const UiCheckbox: FC<Props> = ({
+const UiCheckbox: FC<TUiCheckboxProps> = ({
 	className,
 	label,
 	checked,
@@ -50,4 +51,4 @@ const UiCheckbox: FC<Props> = ({
 	)
 }
 
-export { UiCheckbox }
+export { UiCheckbox, type TUiCheckboxProps }
