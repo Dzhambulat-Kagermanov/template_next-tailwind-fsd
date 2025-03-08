@@ -2,23 +2,52 @@
 import { FC, InputHTMLAttributes } from 'react'
 import { cn } from '@/shared/lib'
 import { UiTypography } from '../UiTypography'
-import cls from './index.module.css'
+
+const wrapperCls = (isDisabled?: boolean) =>
+	`flex gap-x-2.25 items-center ${
+		isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
+	}`
+const labelCls = (isDisabled?: boolean) =>
+	`${isDisabled ? 'text-[#9a8f8f]' : 'text-black'}`
+const inpCls = `cursor-pointer border-[solid] border-[1px] disabled:border-[#9a8f8f] border-black rounded-[4px] size-5 flex items-center justify-between before:w-[calc(100%-2px)] before:h-[calc(100%-2px)] before:block  before:bg-[url(./checkMark.svg)] before:bg-contain before:bg-center before:bg-no-repeat transition-[120ms_transform_ease-in-out] before:origin-bottom-left before:scale-0 checked:before:scale-100`
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label?: string
-  inpCls?: string
+	label?: string
+	inpClassName?: string
 }
-const UiCheckbox: FC<Props> = ({ className, label, inpCls, ...other }) => {
-  return (
-    <label className={cn([cls.label, className])}>
-      <input type="checkbox" className={cn([cls.inp, inpCls])} {...other} />
-      {label && (
-        <UiTypography tag="p" font="Montserrat-R" size={16}>
-          {label}
-        </UiTypography>
-      )}
-    </label>
-  )
+const UiCheckbox: FC<Props> = ({
+	className,
+	label,
+	checked,
+	inpClassName,
+	disabled,
+	...other
+}) => {
+	return (
+		<label className={cn([wrapperCls(disabled), className])}>
+			<input
+				style={{
+					WebkitAppearance: 'none',
+					appearance: 'none',
+				}}
+				checked={checked}
+				type='checkbox'
+				className={cn([inpCls, inpClassName])}
+				disabled={disabled}
+				{...other}
+			/>
+			{label && (
+				<UiTypography
+					tag='p'
+					font='Montserrat-R'
+					size={16}
+					className={labelCls(disabled)}
+				>
+					{label}
+				</UiTypography>
+			)}
+		</label>
+	)
 }
 
 export { UiCheckbox }
